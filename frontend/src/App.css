@@ -1,0 +1,295 @@
+/* ==============================================
+   Phase 1 — App.css
+   Welcome / Environment Status Page Styles
+   
+   NOTE: This will be replaced in Phase 10 with 
+   MUI-based global styles and theme tokens.
+   ============================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-dark:    #0d1117;
+  --bg-card:    #161b22;
+  --bg-card2:   #21262d;
+  --border:     #30363d;
+  --text-1:     #f0f6fc;
+  --text-2:     #8b949e;
+  --text-3:     #6e7681;
+  --accent:     #58a6ff;
+  --green:      #3fb950;
+  --red:        #f85149;
+  --yellow:     #d29922;
+  --radius:     10px;
+  --shadow:     0 4px 24px rgba(0,0,0,0.4);
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-1);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ===== App Container ===== */
+.app-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ===== Header ===== */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.brand-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  margin-top: 2px;
+}
+
+.btn-refresh {
+  background: var(--bg-card2);
+  color: var(--text-1);
+  border: 1px solid var(--border);
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.btn-refresh:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-refresh:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== Section Title ===== */
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+
+/* ===== Services Grid ===== */
+.services-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.2s, transform 0.2s;
+  border-left: 3px solid var(--accent, #58a6ff);
+}
+
+.service-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent, #58a6ff);
+}
+
+.service-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.service-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-1);
+}
+
+.service-sublabel {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+.service-port {
+  font-size: 0.82rem;
+  color: var(--text-2);
+}
+
+.service-port code {
+  background: var(--bg-dark);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+.service-detail {
+  font-size: 0.82rem;
+  color: var(--text-3);
+}
+
+.service-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+
+.service-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== Status Badge ===== */
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.status-online {
+  background: rgba(63, 185, 80, 0.15);
+  color: var(--green);
+}
+
+.status-offline {
+  background: rgba(248, 81, 73, 0.15);
+  color: var(--red);
+}
+
+.status-loading {
+  background: rgba(210, 153, 34, 0.15);
+  color: var(--yellow);
+}
+
+.status-external {
+  background: rgba(88, 166, 255, 0.15);
+  color: var(--accent);
+}
+
+/* ===== Phase List ===== */
+.phase-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.phases-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.phase-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 18px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.phase-done {
+  border-left: 3px solid var(--green);
+}
+
+.phase-done .phase-num {
+  color: var(--green);
+}
+
+.phase-num {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--text-3);
+  min-width: 60px;
+}
+
+.phase-name {
+  flex: 1;
+  color: var(--text-2);
+}
+
+.phase-done .phase-name {
+  color: var(--text-1);
+}
+
+.phase-status {
+  font-size: 1rem;
+}
+
+/* ===== Footer ===== */
+.app-footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-3);
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}

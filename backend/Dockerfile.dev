@@ -1,0 +1,15 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install dependencies first (leverages Docker cache)
+COPY package*.json ./
+
+RUN npm install
+
+# Copy source code (during dev, bind mount will overlay this)
+COPY . .
+
+EXPOSE 5001
+
+CMD ["npm", "run", "dev"]

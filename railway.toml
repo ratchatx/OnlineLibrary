@@ -1,0 +1,15 @@
+# ============================================================
+# Railway Deployment Configuration (Target A)
+# Project: Online Library Management System
+# ============================================================
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+healthcheckPath = "/api/v1/health"
+healthcheckTimeout = 120
+numReplicas = 1
