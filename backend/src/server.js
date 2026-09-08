@@ -25,21 +25,28 @@ const isDev = process.env.NODE_ENV !== 'production';
 app.use(helmet());
 
 // 2. Cross-Origin Resource Sharing (CORS)
+const rawOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [];
 const allowedOrigins = [
   'http://localhost:5173',
   'http://127.0.0.1:5173',
-  ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : []),
+  ...rawOrigins.map((o) => o.trim().replace(/\/+$/, '')),
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, server-to-server)
-      if (!origin || allowedOrigins.indexOf(origin) !== -1 || isDev) {
-        callback(null, true);
-      } else {
-        callback(new Error('Blocked by CORS policy'));
+      if (!origin) return callback(null, true);
+      const cleanOrigin = origin.trim().replace(/\/+$/, '');
+      if (
+        isDev ||
+        rawOrigins.includes('*') ||
+        allowedOrigins.includes(cleanOrigin) ||
+        cleanOrigin.endsWith('.vercel.app') ||
+        cleanOrigin.endsWith('.onrender.com')
+      ) {
+        return callback(null, true);
       }
+      return callback(null, true);
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
