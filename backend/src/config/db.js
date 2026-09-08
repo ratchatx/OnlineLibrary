@@ -23,6 +23,11 @@ const dbConfig = {
   charset: 'utf8mb4',
   timezone: '+00:00',
   decimalNumbers: true,
+  ssl:
+    process.env.DB_SSL === 'true' ||
+    (process.env.DB_HOST && (process.env.DB_HOST.includes('tidbcloud.com') || process.env.DB_HOST.includes('aivencloud.com')))
+      ? { minVersion: 'TLSv1.2', rejectUnauthorized: true }
+      : undefined,
 };
 
 // Create the connection pool
